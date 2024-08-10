@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    public int test = 2;
+    public string currentWord;
     ManagerScript managerScript;
 
     // Start is called before the first frame update
@@ -20,24 +20,19 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.LogError("ManagerScript not found on Game Manager!");
         }
-
-        print(test.ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (managerScript == null)
-        {
-            print("death");
-        }
+        validWord(currentWord);
+    }
+
+    public bool validWord(string word)
+    {
+        if (managerScript != null && managerScript.isWordValid(word))
+            return true;
         else
-        {
-            print("okay");
-        }
-        if (managerScript != null && managerScript.isWordValid("rOD"))
-            print("yup");
-        else
-            print("nop");
+            return false;
     }
 }
