@@ -5,8 +5,9 @@ using UnityEngine;
 public class ManagerScript : MonoBehaviour
 {
     public HashSet<string> validWords;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         LoadWords();
     }
@@ -27,5 +28,11 @@ public class ManagerScript : MonoBehaviour
             validWords.Add(word);
         }
         Debug.Log($"Loaded {validWords.Count} words.");
+    }
+
+    // Method to check if a word is valid
+    public bool isWordValid(string word)
+    {
+        return validWords.Contains(word.ToUpper());
     }
 }
