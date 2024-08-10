@@ -7,8 +7,7 @@ public class GridScript : MonoBehaviour
     public GameObject tile; 
     public int gridSize = 4; // 4x4 grid
     public int minimumValidWords = 25; 
-    public HashSet<string> validWords; // from GameManager
-    private List<string> boardWords; // valid words on current board
+    public HashSet<string> boardWords; // valid words on current board
     private GameObject[,] grid;
     ManagerScript managerScript;
 
@@ -47,7 +46,7 @@ public class GridScript : MonoBehaviour
         Debug.Log($"Grid generated with {boardWords.Count} valid words");
     }
 
-
+    
     void GenerateGrid()
     {
         float startX = -3f;
@@ -73,9 +72,50 @@ public class GridScript : MonoBehaviour
 
     }
 
-    List<string> FindValidWordsOnBoard()
+    HashSet<string> FindValidWordsOnBoard()
     {
-        // implement later
+        HashSet<string> foundWords = new HashSet<string>();
+
+        // Iterate over each tile on the grid
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int y = 0; y < gridSize; y++)
+            {
+                bool[,] visited = new bool[gridSize, gridSize];
+                DFS(x, y, "", visited, foundWords);
+            }
+        }
+
+        return foundWords;
+    }
+
+    void DFS(int x, int y, string currentWord, bool[,] visited, HashSet<string> foundWords)
+    {
+        if (x < 0 || x >= gridSize || y < 0 || y >= gridSize || visited[x, y])
+            return;
+
+        visited[x, y] = true;
+
+        // append curr letter
+        TileScript tileScript = grid[x, y].GetComponent<TileScript>();
+        string newWord = currentWord + tileScript.GetLetter();
+
+        if (validWord(newWord))
+        {
+            foundWords.Add(newWord);
+        }
+
+        DFS(x - 1, y, newWord, visited, foundWords); // l
+        DFS(x + 1, y, newWord, visited, foundWords); // r
+        DFS(x, y - 1, newWord, visited, foundWords); // d
+        DFS(x, y + 1, newWord, visited, foundWords); // u
+        DFS(x - 1, y - 1, newWord, visited, foundWords); // dl
+        DFS(x + 1, y - 1, newWord, visited, foundWords); // dr
+        DFS(x - 1, y + 1, newWord, visited, foundWords); // ul
+        DFS(x + 1, y + 1, newWord, visited, foundWords); // ur
+
+        // backtrack
+        visited[x, y] = false;
     }
 
     public GameObject GetTileAt(int x, int y)
