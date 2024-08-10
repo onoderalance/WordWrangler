@@ -26,25 +26,25 @@ public class GridScript : MonoBehaviour
     void GenerateValidGrid()
     {
         GenerateGrid();
-        //bool isValid = false;
+        bool isValid = false;
 
-        //while (!isValid)
-        //{
-        //    GenerateGrid();
+        while (!isValid)
+        {
+            GenerateGrid();
 
-        //    boardWords = FindValidWordsOnBoard();
+            boardWords = FindValidWordsOnBoard();
 
-        //    if (boardWords.Count >= minimumValidWords)
-        //    {
-        //        isValid = true;
-        //    }
-        //    else
-        //    {
-        //        ClearGrid();
-        //    }
-        //}
+            if (boardWords.Count >= minimumValidWords)
+            {
+                isValid = true;
+            }
+            else
+            {
+                ClearGrid();
+            }
+        }
 
-        //Debug.Log($"Grid generated with {boardWords.Count} valid words");
+        Debug.Log($"Grid generated with {boardWords.Count} valid words");
     }
 
 
@@ -73,10 +73,10 @@ public class GridScript : MonoBehaviour
 
     }
 
-    //List<string> FindValidWordsOnBoard()
-    //{
-    //    // implement later
-    //}
+    List<string> FindValidWordsOnBoard()
+    {
+        // implement later
+    }
 
     public GameObject GetTileAt(int x, int y)
     {

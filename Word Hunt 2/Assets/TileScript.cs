@@ -43,4 +43,9 @@ public class TileScript : MonoBehaviour
         int asciiValue = UnityEngine.Random.Range(65, 91); // ASCII values for 'A' (65) to 'Z' (90)
         return (char)asciiValue;
     }
+
+    public char GetLetter()
+    {
+        return letter;
+    }
 }
