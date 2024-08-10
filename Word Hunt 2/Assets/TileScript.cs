@@ -7,12 +7,13 @@ using UnityEngine.SocialPlatforms.Impl;
 public class TileScript : MonoBehaviour
 {
     public char letter;
-    public TextMeshProUGUI textMeshPro;
+    public TextMeshPro textMeshPro;
 
     // Start is called before the first frame update
     void Start()
     {
         letter = 'c';
+        UpdateLetterText();
     }
 
     // Update is called once per frame
