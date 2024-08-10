@@ -12,9 +12,15 @@ public class TileScript : MonoBehaviour
     public int posY;
     public TextMeshPro textMeshPro;
 
+    private SpriteRenderer spriteRenderer;
+    public Sprite spriteDefault;
+    public Sprite spriteSelected;
+
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = spriteDefault;
         letter = GetRandomLetter();
         UpdateLetterText();
     }
@@ -47,5 +53,16 @@ public class TileScript : MonoBehaviour
     public char GetLetter()
     {
         return letter;
+    }
+    public void UnSelect()
+    {
+        isSelected = false;
+        spriteRenderer.sprite = spriteDefault;
+    }
+
+    public void Select()
+    {
+        isSelected = true;
+        spriteRenderer.sprite = spriteSelected;
     }
 }

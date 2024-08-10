@@ -27,13 +27,24 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkMouseCollision();
-        //if mouse is being held
-        if (Input.GetMouseButton(0))
+        //if mouse was first clicked, used for validating starting a new wrd
+        if (Input.GetMouseButtonDown(0) && checkMouseCollision())
         {
-            checkMouseCollision();
+            buildingWord = true;
+            addTileToWord(tile);
         }
-        else
+        //if mouse is being held
+        else if (Input.GetMouseButton(0))
+        {
+            //if mouse is touching a tile
+            if (checkMouseCollision())
+            {
+                //tile add validation
+                if (!tile.isSelected)
+                    addTileToWord(tile);
+            }
+        }
+        else //if mouse is released, reset
         {
             buildingWord = false;
             currentWord = string.Empty;
@@ -57,39 +68,26 @@ public class PlayerScript : MonoBehaviour
         // Check if the mouse position overlaps any 2D collider
         Collider2D collider = Physics2D.OverlapPoint(mousePosition);
 
-        // If a collider is found and the object is named "Tile"
-        if (collider != null && collider.gameObject.name == "Tile")
+        // If a collider is found and the object has the TileScript component
+        if (collider != null)
         {
-            Debug.Log("Mouse is touching the Tile");
-            tile = collider.gameObject.GetComponent<TileScript>(); ;
-            Debug.Log("Tile Letter: " + tile.letter);
-            // Example: Change color of the Tile object when mouse is over it
-            return true;
-        }
-        else
-        {
-            Debug.Log("Mouse is not touching the Tile");
-            return false;
-        }
-        /* // Create a ray from the camera through the mouse position
-         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-         RaycastHit hit;
+            tile = collider.gameObject.GetComponent<TileScript>();
 
-         // Perform the raycast
-         if (Physics.Raycast(ray, out hit))
-         {
-             // Check if the ray hit a GameObject with the Tile script
-             tile = hit.collider.GetComponent<TileScript>();
-             if (tile != null)
-             {
-                 // We have found a tile, now we can access its properties
-                 Debug.Log($"Mouse is hovering over a Tile");
+            // Check if the TileScript component is attached to the GameObject
+            if (tile != null)
+            {
+                Debug.Log("Mouse is touching the " + tile.letter + " Tile");
+                return true;
+            }
+        }
+        Debug.Log("Mouse is not touching a Tile");
+        return false;
+    }
 
-                 // You can perform additional actions here, like changing the color or triggering events
-                 return true;
-             }
-         }
-         Debug.Log($"Mouse is NOT hovering over a Tile");
-         return false;*/
+    //adds tile moused over to the word
+    void addTileToWord(TileScript tile)
+    {
+        currentWord += tile.letter;
+        tile.Select();
     }
 }
