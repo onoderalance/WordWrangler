@@ -63,6 +63,10 @@ public class GridScript : MonoBehaviour
 
                 GameObject newTile = Instantiate(tile, new Vector2(posX, posY), Quaternion.identity, transform);
 
+                // update var in tile
+                TileScript tileScript = newTile.GetComponent<TileScript>();
+                tileScript.SetPosition(x, y);
+
                 grid[x, y] = newTile;
             }
         }
