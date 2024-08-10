@@ -210,6 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7ffaac4b67e4f609261b2528493bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tile: {fileID: 902871735763529242, guid: 612aac90bbf49914ba671636914013e5, type: 3}
+  gridSize: 4
+  minimumValidWords: 25
 --- !u!1 &563293300
 GameObject:
   m_ObjectHideFlags: 0

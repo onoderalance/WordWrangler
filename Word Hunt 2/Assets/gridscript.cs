@@ -7,17 +7,16 @@ public class GridScript : MonoBehaviour
     public GameObject tile; 
     public int gridSize = 4; // 4x4 grid
     public int minimumValidWords = 25; 
-    private HashSet<string> validWords; // from GameManager
+    public HashSet<string> validWords; // from GameManager
     private List<string> boardWords; // valid words on current board
     private GameObject[,] grid;
-    public ManagerScript gameManager;
+    ManagerScript managerScript;
 
     void Start()
     {
-        // get validWords 
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ManagerScript>();
-        validWords = gameManager.LoadWords();
-
+        // get validWords
+        GameObject managerObject = GameObject.Find("Game Manager");
+        managerScript = managerObject.GetComponent<ManagerScript>();
         grid = new GameObject[gridSize, gridSize];
 
         // regen till valid
@@ -45,7 +44,7 @@ public class GridScript : MonoBehaviour
         //    }
         //}
 
-        Debug.Log($"Grid generated with {boardWords.Count} valid words");
+        //Debug.Log($"Grid generated with {boardWords.Count} valid words");
     }
 
 
@@ -70,10 +69,10 @@ public class GridScript : MonoBehaviour
 
     }
 
-    List<string> FindValidWordsOnBoard()
-    {
-        // implement later
-    }
+    //List<string> FindValidWordsOnBoard()
+    //{
+    //    // implement later
+    //}
 
     public GameObject GetTileAt(int x, int y)
     {
@@ -94,5 +93,13 @@ public class GridScript : MonoBehaviour
             Destroy(child.gameObject);
         }
         // clear grid array too
+    }
+
+    public bool validWord(string word)
+    {
+        if (managerScript != null && managerScript.isWordValid(word))
+            return true;
+        else
+            return false;
     }
 }
