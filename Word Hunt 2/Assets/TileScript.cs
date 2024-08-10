@@ -7,6 +7,9 @@ using UnityEngine.SocialPlatforms.Impl;
 public class TileScript : MonoBehaviour
 {
     public char letter;
+    public bool isSelected;
+    public int posX;
+    public int posY;
     public TextMeshPro textMeshPro;
 
     // Start is called before the first frame update
