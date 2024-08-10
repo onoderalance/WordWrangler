@@ -18,7 +18,7 @@ public class ManagerScript : MonoBehaviour
 
     }
 
-    private void LoadWords()
+    public void LoadWords()
     {
         TextAsset wordFile = Resources.Load<TextAsset>("words");
         validWords = new HashSet<string>();

@@ -9,14 +9,14 @@ public class GridScript : MonoBehaviour
     public int minimumValidWords = 25; 
     private HashSet<string> validWords; // from GameManager
     private List<string> boardWords; // valid words on current board
-    private GameManager gameManager;
     private GameObject[,] grid;
+    public ManagerScript gameManager;
 
     void Start()
     {
         // get validWords 
-        gameManager = FindObjectOfType<GameManager>();
-        validWords = gameManager.GetValidWords();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ManagerScript>();
+        validWords = gameManager.LoadWords();
 
         grid = new GameObject[gridSize, gridSize];
 
@@ -26,23 +26,24 @@ public class GridScript : MonoBehaviour
 
     void GenerateValidGrid()
     {
-        bool isValid = false;
+        GenerateGrid();
+        //bool isValid = false;
 
-        while (!isValid)
-        {
-            GenerateGrid();
+        //while (!isValid)
+        //{
+        //    GenerateGrid();
 
-            boardWords = FindValidWordsOnBoard();
+        //    boardWords = FindValidWordsOnBoard();
 
-            if (boardWords.Count >= minimumValidWords)
-            {
-                isValid = true;
-            }
-            else
-            {
-                ClearGrid();
-            }
-        }
+        //    if (boardWords.Count >= minimumValidWords)
+        //    {
+        //        isValid = true;
+        //    }
+        //    else
+        //    {
+        //        ClearGrid();
+        //    }
+        //}
 
         Debug.Log($"Grid generated with {boardWords.Count} valid words");
     }
@@ -50,14 +51,23 @@ public class GridScript : MonoBehaviour
 
     void GenerateGrid()
     {
+        float startX = -3f;
+        float startY = 3f;
+        float offset = 2f;  
+
         for (int x = 0; x < gridSize; x++)
         {
             for (int y = 0; y < gridSize; y++)
             {
-                GameObject newTile = Instantiate(tile, new Vector2(x, y), Quaternion.identity, transform);
+                float posX = startX + x * offset;
+                float posY = startY - y * offset;
+
+                GameObject newTile = Instantiate(tile, new Vector2(posX, posY), Quaternion.identity, transform);
+
                 grid[x, y] = newTile;
             }
         }
+
     }
 
     List<string> FindValidWordsOnBoard()
@@ -83,6 +93,6 @@ public class GridScript : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        grid = [];
+        // clear grid array too
     }
 }
