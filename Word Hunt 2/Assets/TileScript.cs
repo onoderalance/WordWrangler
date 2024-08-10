@@ -12,7 +12,7 @@ public class TileScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        letter = 'c';
+        letter = GetRandomLetter();
         UpdateLetterText();
     }
 
@@ -26,5 +26,12 @@ public class TileScript : MonoBehaviour
     {
         // Update the text with the current letter value
         textMeshPro.text = letter.ToString();
+    }
+
+    // Chooses a random letter A to Z
+    public char GetRandomLetter()
+    {
+        int asciiValue = UnityEngine.Random.Range(65, 91); // ASCII values for 'A' (65) to 'Z' (90)
+        return (char)asciiValue;
     }
 }
