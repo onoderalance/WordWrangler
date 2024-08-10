@@ -25,6 +25,12 @@ public class TileScript : MonoBehaviour
         
     }
 
+    public void SetPosition(int x, int y)
+    {
+        posX = x;
+        posY = y;
+    }
+
     void UpdateLetterText()
     {
         // Update the text with the current letter value
