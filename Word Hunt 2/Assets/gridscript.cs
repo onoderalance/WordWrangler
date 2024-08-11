@@ -25,25 +25,25 @@ public class GridScript : MonoBehaviour
     void GenerateValidGrid()
     {
         GenerateGrid();
-        bool isValid = false;
+        //bool isValid = false;
 
-        while (!isValid)
-        {
-            GenerateGrid();
+        //while (!isValid)
+        //{
+        //    GenerateGrid();
 
-            boardWords = FindValidWordsOnBoard();
+        //    boardWords = FindValidWordsOnBoard();
 
-            if (boardWords.Count >= minimumValidWords)
-            {
-                isValid = true;
-            }
-            else
-            {
-                ClearGrid();
-            }
-        }
+        //    if (boardWords.Count >= minimumValidWords)
+        //    {
+        //        isValid = true;
+        //    }
+        //    else
+        //    {
+        //        ClearGrid();
+        //    }
+        //}
 
-        Debug.Log($"Grid generated with {boardWords.Count} valid words");
+        //Debug.Log($"Grid generated with {boardWords.Count} valid words");
     }
 
     
@@ -145,5 +145,17 @@ public class GridScript : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void UnselectAllTiles()
+    {
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int y = 0; y < gridSize; y++)
+            {
+                TileScript tileScript = grid[x, y].GetComponent<TileScript>();
+                tileScript.UnSelect();
+            }
+        }
     }
 }
