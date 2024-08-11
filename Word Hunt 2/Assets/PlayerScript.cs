@@ -8,20 +8,33 @@ public class PlayerScript : MonoBehaviour
     public bool buildingWord;
     ManagerScript managerScript;
     TileScript tile;
+    GridScript grid;
 
     // Start is called before the first frame update
     void Start()
     {
+        //find Game Manager
         GameObject managerObject = GameObject.Find("Game Manager");
         if (managerObject != null)
         {
             managerScript = managerObject.GetComponent<ManagerScript>();
         }
-
-        if (managerScript == null)
+        else
         {
-            Debug.LogError("ManagerScript not found on Game Manager!");
+            Debug.LogError("Manager not found!");
         }
+
+
+        GameObject gridObject = GameObject.Find("Grid");
+        if (gridObject != null)
+        {
+            grid = gridObject.GetComponent<GridScript>();
+        }
+        else
+        {
+            Debug.LogError("Grid not found!");
+        }
+
     }
 
     // Update is called once per frame
@@ -46,10 +59,13 @@ public class PlayerScript : MonoBehaviour
         }
         else //if mouse is released, reset
         {
+            //TODO: ON RELEASE WE CAN CHECK THE WORD IF ITS VALID AND ADD SCORE
             buildingWord = false;
             currentWord = string.Empty;
+            grid.UnselectAllTiles();
         }
-        validWord(currentWord);
+        //unfinished, but will check if the word is valid or not here
+        //validWord(currentWord);
     }
 
     public bool validWord(string word)
