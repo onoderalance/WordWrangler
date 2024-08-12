@@ -33,6 +33,13 @@ public class GridScript : MonoBehaviour
             Debug.Log("Attempt in while loop");
             GenerateGrid();
             boardWords = FindValidWordsOnBoard();
+            string words = "Valid Words on Board:\n";
+            foreach (string word in boardWords)
+            {
+                words += word + "\n";
+            }
+
+            Debug.Log(words);
 
             if (boardWords.Count >= minimumValidWords)
             {
@@ -48,6 +55,8 @@ public class GridScript : MonoBehaviour
     }
 
     
+
+
     void GenerateGrid()
     {
         float startX = -3f;
@@ -101,9 +110,8 @@ public class GridScript : MonoBehaviour
 
         // append curr letter
         TileScript tileScript = grid[x, y].GetComponent<TileScript>();
-        Debug.Log($"Letter: {tileScript.GetLetter()}");
         string newWord = currentWord + tileScript.GetLetter();
-        Debug.Log($"newWord 1: {newWord}");
+        
         if (validWord(newWord))
         {
             foundWords.Add(newWord);
@@ -126,7 +134,7 @@ public class GridScript : MonoBehaviour
                 if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize && !visited[newX, newY])
                 {
                     newWord = word + grid[newX, newY].GetComponent<TileScript>().GetLetter();
-                    Debug.Log($"newWord 2: {newWord}");
+                    
                     if (validWord(newWord))
                     {
                         foundWords.Add(newWord);

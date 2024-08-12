@@ -19,10 +19,14 @@ public class TileScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    private void Awake()
+    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = spriteDefault;
         letter = GetRandomLetter();
-        Debug.Log($"Assigned Letter: {letter}");
         UpdateLetterText();
     }
 
