@@ -15,6 +15,9 @@ public class PlayerScript : MonoBehaviour
     public int currTilePosX;
     public int currTilePosY;
 
+    //variables for player's stored words
+    public HashSet<string> foundWords = new HashSet<string>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,15 +72,23 @@ public class PlayerScript : MonoBehaviour
         }
         else //if mouse is released, reset
         {
+            //if word is valid, add it to our list
             //TODO: ON RELEASE WE CAN CHECK THE WORD IF ITS VALID AND ADD SCORE
+            if (currentWord != string.Empty)
+            {
+                if (validWord(currentWord))
+                    Debug.Log($"Added {currentWord}");
+                    foundWords.Add(currentWord);
+            }
+            
+            //reset wordbuilding
             buildingWord = false;
             currentWord = string.Empty;
             grid.UnselectAllTiles();
         }
-        //unfinished, but will check if the word is valid or not here
-        //validWord(currentWord);
     }
 
+    //TO-DO: VALIDATE WORRDS PROPERLY (NO DUPES N SUCH, CHECK PROPER LIST)
     public bool validWord(string word)
     {
         if (managerScript != null && managerScript.isWordValid(word))
