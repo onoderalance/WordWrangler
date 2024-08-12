@@ -102,25 +102,31 @@ public class GridScript : MonoBehaviour
 
         visited[x, y] = true;
 
-        // append letter
+        // append curr letter
         TileScript tileScript = grid[x, y].GetComponent<TileScript>();
         string newWord = currentWord + tileScript.GetLetter();
 
-        if (validWord(newWord))
+        Trie trie = managerScript.GetTrie();
+
+        // if current prefix is valid, continue searching
+        if (trie.StartsWith(newWord))
         {
-            foundWords.Add(newWord);
+            if (trie.Search(newWord) && newWord.Length >= 3)
+            {
+                foundWords.Add(newWord);
+            }
+
+            // recursive call
+            int[,] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }, { 1, 1 } };
+            for (int i = 0; i < 8; i++)
+            {
+                int newX = x + directions[i, 0];
+                int newY = y + directions[i, 1];
+                DFS(newX, newY, newWord, visited, foundWords);
+            }
         }
 
-        // recursive call 
-        int[,] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }, { 1, 1 } };
-        for (int i = 0; i < 8; i++)
-        {
-            int newX = x + directions[i, 0];
-            int newY = y + directions[i, 1];
-            DFS(newX, newY, newWord, visited, foundWords);
-        }
-
-        // backtrack
+        // Backtrack
         visited[x, y] = false;
     }
 
