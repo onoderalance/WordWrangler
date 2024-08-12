@@ -22,6 +22,7 @@ public class TileScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = spriteDefault;
         letter = GetRandomLetter();
+        Debug.Log($"Assigned Letter: {letter}");
         UpdateLetterText();
     }
 

@@ -15,7 +15,7 @@ public class GridScript : MonoBehaviour
     void Start()
     {
         // get validWords
-        GameObject managerObject = GameObject.Find("Game Manager");
+        GameObject managerObject = GameObject.FindWithTag("GameManager");
         managerScript = managerObject.GetComponent<ManagerScript>();
         grid = new GameObject[gridSize, gridSize];
 
@@ -101,8 +101,9 @@ public class GridScript : MonoBehaviour
 
         // append curr letter
         TileScript tileScript = grid[x, y].GetComponent<TileScript>();
+        Debug.Log($"Letter: {tileScript.GetLetter()}");
         string newWord = currentWord + tileScript.GetLetter();
-
+        Debug.Log($"newWord 1: {newWord}");
         if (validWord(newWord))
         {
             foundWords.Add(newWord);
@@ -125,6 +126,7 @@ public class GridScript : MonoBehaviour
                 if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize && !visited[newX, newY])
                 {
                     newWord = word + grid[newX, newY].GetComponent<TileScript>().GetLetter();
+                    Debug.Log($"newWord 2: {newWord}");
                     if (validWord(newWord))
                     {
                         foundWords.Add(newWord);
@@ -170,7 +172,7 @@ public class GridScript : MonoBehaviour
 
     public bool validWord(string word)
     {
-        GameObject managerObject = GameObject.Find("Game Manager");
+        GameObject managerObject = GameObject.FindWithTag("GameManager");
         managerScript = managerObject.GetComponent<ManagerScript>();
         if (managerScript.isWordValid(word))
         {
