@@ -26,9 +26,7 @@ public class GridScript : MonoBehaviour
     void GenerateValidGrid()
     {
         bool isValid = false;
-        int retries = 0;
-        int maxRetries = 100;
-        while (!isValid && retries < maxRetries)
+        while (!isValid)
         {
             Debug.Log("Attempt in while loop");
             GenerateGrid();
@@ -48,7 +46,6 @@ public class GridScript : MonoBehaviour
             else
             {
                 ClearGrid();
-                retries++;
             }
         }
         Debug.Log($"Grid generated with {boardWords.Count} valid words");
