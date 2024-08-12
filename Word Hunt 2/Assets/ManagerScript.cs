@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ManagerScript : MonoBehaviour
 {
-    public HashSet<string> validWords;
+    public Trie validWordsTrie;
 
     // Start is called before the first frame update
     void Awake()
     {
-        LoadWords();
+        validWordsTrie = new Trie();
+        LoadWordsIntoTrie();
     }
 
     // Update is called once per frame
@@ -18,23 +19,27 @@ public class ManagerScript : MonoBehaviour
 
     }
 
-    public void LoadWords()
+    // load words from the text file into the Trie
+    public void LoadWordsIntoTrie()
     {
         TextAsset wordFile = Resources.Load<TextAsset>("words");
-        validWords = new HashSet<string>();
         string[] words = wordFile.text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
         foreach (string word in words)
         {
-            validWords.Add(word);
+            validWordsTrie.Insert(word.ToUpper());
         }
-        Debug.Log($"Loaded {validWords.Count} words.");
+        Debug.Log($"Loaded {words.Length} words into the Trie.");
     }
 
-    // Method to check if a word is valid
     public bool isWordValid(string word)
     {
-        if (word.Length <= 2) //word must be at least 3 chars long
+        if (word.Length <= 2) // Word must be at least 3 characters long
             return false;
-        return validWords.Contains(word.ToUpper());
+        return validWordsTrie.Search(word.ToUpper());
+    }
+
+    public Trie GetTrie()
+    {
+        return validWordsTrie;
     }
 }
