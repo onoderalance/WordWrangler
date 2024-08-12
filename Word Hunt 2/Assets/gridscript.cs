@@ -10,11 +10,12 @@ public class GridScript : MonoBehaviour
     public HashSet<string> boardWords; // valid words on current board
     private GameObject[,] grid;
     ManagerScript managerScript;
+    TileScript tileScript;
 
     void Start()
     {
         // get validWords
-        GameObject managerObject = GameObject.Find("Game Manager");
+        GameObject managerObject = GameObject.FindWithTag("GameManager");
         managerScript = managerObject.GetComponent<ManagerScript>();
         grid = new GameObject[gridSize, gridSize];
 
@@ -24,29 +25,38 @@ public class GridScript : MonoBehaviour
 
     void GenerateValidGrid()
     {
-        GenerateGrid();
-        //bool isValid = false;
+        bool isValid = false;
+        int retries = 0;
+        int maxRetries = 100;
+        while (!isValid && retries < maxRetries)
+        {
+            Debug.Log("Attempt in while loop");
+            GenerateGrid();
+            boardWords = FindValidWordsOnBoard();
+            string words = "Valid Words on Board:\n";
+            foreach (string word in boardWords)
+            {
+                words += word + "\n";
+            }
 
-        //while (!isValid)
-        //{
-        //    GenerateGrid();
+            Debug.Log(words);
 
-        //    boardWords = FindValidWordsOnBoard();
-
-        //    if (boardWords.Count >= minimumValidWords)
-        //    {
-        //        isValid = true;
-        //    }
-        //    else
-        //    {
-        //        ClearGrid();
-        //    }
-        //}
-
-        //Debug.Log($"Grid generated with {boardWords.Count} valid words");
+            if (boardWords.Count >= minimumValidWords)
+            {
+                isValid = true;
+            }
+            else
+            {
+                ClearGrid();
+                retries++;
+            }
+        }
+        Debug.Log($"Grid generated with {boardWords.Count} valid words");
     }
 
     
+
+
     void GenerateGrid()
     {
         float startX = -3f;
@@ -74,9 +84,10 @@ public class GridScript : MonoBehaviour
 
     HashSet<string> FindValidWordsOnBoard()
     {
+        Debug.Log("Attempt in find valid words");
         HashSet<string> foundWords = new HashSet<string>();
 
-        // Iterate over each tile on the grid
+        // iterate over each tile on the grid
         for (int x = 0; x < gridSize; x++)
         {
             for (int y = 0; y < gridSize; y++)
@@ -91,6 +102,7 @@ public class GridScript : MonoBehaviour
 
     void DFS(int x, int y, string currentWord, bool[,] visited, HashSet<string> foundWords)
     {
+        Debug.Log("Attempt in DFS");
         if (x < 0 || x >= gridSize || y < 0 || y >= gridSize || visited[x, y])
             return;
 
@@ -99,24 +111,44 @@ public class GridScript : MonoBehaviour
         // append curr letter
         TileScript tileScript = grid[x, y].GetComponent<TileScript>();
         string newWord = currentWord + tileScript.GetLetter();
-
+        
         if (validWord(newWord))
         {
             foundWords.Add(newWord);
         }
 
-        DFS(x - 1, y, newWord, visited, foundWords); // l
-        DFS(x + 1, y, newWord, visited, foundWords); // r
-        DFS(x, y - 1, newWord, visited, foundWords); // d
-        DFS(x, y + 1, newWord, visited, foundWords); // u
-        DFS(x - 1, y - 1, newWord, visited, foundWords); // dl
-        DFS(x + 1, y - 1, newWord, visited, foundWords); // dr
-        DFS(x - 1, y + 1, newWord, visited, foundWords); // ul
-        DFS(x + 1, y + 1, newWord, visited, foundWords); // ur
+        // stack to avoid deep recursion
+        Stack<(int, int, string)> stack = new Stack<(int, int, string)>();
+        stack.Push((x, y, newWord));
+
+        while (stack.Count > 0)
+        {
+            var (curX, curY, word) = stack.Pop();
+            
+            int[,] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }, { 1, 1 } };
+            for (int i = 0; i < 8; i++)
+            {
+                int newX = curX + directions[i, 0];
+                int newY = curY + directions[i, 1];
+
+                if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize && !visited[newX, newY])
+                {
+                    newWord = word + grid[newX, newY].GetComponent<TileScript>().GetLetter();
+                    
+                    if (validWord(newWord))
+                    {
+                        foundWords.Add(newWord);
+                    }
+                    visited[newX, newY] = true;
+                    stack.Push((newX, newY, newWord));
+                }
+            }
+        }
 
         // backtrack
         visited[x, y] = false;
     }
+
 
     public GameObject GetTileAt(int x, int y)
     {
@@ -136,15 +168,28 @@ public class GridScript : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        // clear grid array too
+        // clear array
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int y = 0; y < gridSize; y++)
+            {
+                grid[x, y] = null;
+            }
+        }
     }
 
     public bool validWord(string word)
     {
-        if (managerScript != null && managerScript.isWordValid(word))
+        GameObject managerObject = GameObject.FindWithTag("GameManager");
+        managerScript = managerObject.GetComponent<ManagerScript>();
+        if (managerScript.isWordValid(word))
+        {
             return true;
+        }
         else
+        {
             return false;
+        }
     }
 
     public void UnselectAllTiles()
