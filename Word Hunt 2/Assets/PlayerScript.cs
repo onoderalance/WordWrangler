@@ -88,13 +88,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    //TO-DO: VALIDATE WORRDS PROPERLY (NO DUPES N SUCH, CHECK PROPER LIST)
+    //validates word found by the player
     public bool validWord(string word)
     {
-        if (managerScript != null && managerScript.isWordValid(word))
+        if (grid.boardWords.Contains(word) && !foundWords.Contains(word)) //in the possible words of the board, but not found words
+        {
+            print($"Valid word {word}");
             return true;
+        }
         else
+        {
             return false;
+        }
+
     }
 
     bool checkMouseTileCollision()
