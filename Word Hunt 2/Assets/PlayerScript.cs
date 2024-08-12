@@ -93,7 +93,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (grid.boardWords.Contains(word) && !foundWords.Contains(word)) //in the possible words of the board, but not found words
         {
-            print($"Valid word {word}");
+            //print($"Valid word {word}");
             return true;
         }
         else
@@ -119,11 +119,11 @@ public class PlayerScript : MonoBehaviour
             // Check if the TileScript component is attached to the GameObject
             if (tile != null)
             {
-                Debug.Log("Mouse is touching the " + tile.letter + " Tile");
+                //Debug.Log("Mouse is touching the " + tile.letter + " Tile");
                 return true;
             }
         }
-        Debug.Log("Mouse is not touching a Tile");
+        //Debug.Log("Mouse is not touching a Tile");
         return false;
     }
 
