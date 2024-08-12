@@ -28,10 +28,9 @@ public class GridScript : MonoBehaviour
         bool isValid = false;
         while (!isValid)
         {
-            Debug.Log("Attempt in while loop");
             GenerateGrid();
             boardWords = FindValidWordsOnBoard();
-            string words = "Valid Words on Board:\n";
+            string words = "";
             foreach (string word in boardWords)
             {
                 words += word + "\n";
@@ -81,7 +80,6 @@ public class GridScript : MonoBehaviour
 
     HashSet<string> FindValidWordsOnBoard()
     {
-        Debug.Log("Attempt in find valid words");
         HashSet<string> foundWords = new HashSet<string>();
 
         // iterate over each tile on the grid
@@ -99,47 +97,27 @@ public class GridScript : MonoBehaviour
 
     void DFS(int x, int y, string currentWord, bool[,] visited, HashSet<string> foundWords)
     {
-        Debug.Log("Attempt in DFS");
         if (x < 0 || x >= gridSize || y < 0 || y >= gridSize || visited[x, y])
             return;
 
         visited[x, y] = true;
 
-        // append curr letter
+        // append letter
         TileScript tileScript = grid[x, y].GetComponent<TileScript>();
         string newWord = currentWord + tileScript.GetLetter();
-        
+
         if (validWord(newWord))
         {
             foundWords.Add(newWord);
         }
 
-        // stack to avoid deep recursion
-        Stack<(int, int, string)> stack = new Stack<(int, int, string)>();
-        stack.Push((x, y, newWord));
-
-        while (stack.Count > 0)
+        // recursive call 
+        int[,] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }, { 1, 1 } };
+        for (int i = 0; i < 8; i++)
         {
-            var (curX, curY, word) = stack.Pop();
-            
-            int[,] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }, { 1, 1 } };
-            for (int i = 0; i < 8; i++)
-            {
-                int newX = curX + directions[i, 0];
-                int newY = curY + directions[i, 1];
-
-                if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize && !visited[newX, newY])
-                {
-                    newWord = word + grid[newX, newY].GetComponent<TileScript>().GetLetter();
-                    
-                    if (validWord(newWord))
-                    {
-                        foundWords.Add(newWord);
-                    }
-                    visited[newX, newY] = true;
-                    stack.Push((newX, newY, newWord));
-                }
-            }
+            int newX = x + directions[i, 0];
+            int newY = y + directions[i, 1];
+            DFS(newX, newY, newWord, visited, foundWords);
         }
 
         // backtrack
