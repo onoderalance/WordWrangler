@@ -33,6 +33,8 @@ public class ManagerScript : MonoBehaviour
     // Method to check if a word is valid
     public bool isWordValid(string word)
     {
+        if (word.Length <= 2) //word must be at least 3 chars long
+            return false;
         return validWords.Contains(word.ToUpper());
     }
 }
