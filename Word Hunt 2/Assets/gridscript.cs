@@ -50,7 +50,7 @@ public class GridScript : MonoBehaviour
         Debug.Log($"Grid generated with {boardWords.Count} valid words");
     }
 
-    
+        
 
 
     void GenerateGrid()
