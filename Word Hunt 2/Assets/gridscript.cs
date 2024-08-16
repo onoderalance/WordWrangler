@@ -11,6 +11,7 @@ public class GridScript : MonoBehaviour
     private GameObject[,] grid;
     ManagerScript managerScript;
     TileScript tileScript;
+    public GameData gameData;
 
     void Start()
     {
@@ -41,6 +42,7 @@ public class GridScript : MonoBehaviour
             if (boardWords.Count >= minimumValidWords)
             {
                 isValid = true;
+                gameData.boardWords = new HashSet<string>(boardWords);
             }
             else
             {
