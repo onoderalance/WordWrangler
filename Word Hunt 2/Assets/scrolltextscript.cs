@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class scrolltextscript : MonoBehaviour
 {
-    public Text textComponent; public GameData gameData;
+    public Text textComponent;
+    public GameData gameData;
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateText(GameData.Instance.boardWords);
+        UpdateText(gameData.boardWords);
     }
 
     // Update is called once per frame

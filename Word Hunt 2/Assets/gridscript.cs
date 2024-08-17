@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GridScript : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GridScript : MonoBehaviour
     private GameObject[,] grid;
     ManagerScript managerScript;
     TileScript tileScript;
-    public GameData gameData;
+    public GameData GameData;
 
     void Start()
     {
@@ -42,7 +43,8 @@ public class GridScript : MonoBehaviour
             if (boardWords.Count >= minimumValidWords)
             {
                 isValid = true;
-                gameData.boardWords = new HashSet<string>(boardWords);
+                GameData.boardWords = boardWords;
+                GameData.totalScore = 10;
             }
             else
             {
@@ -50,6 +52,7 @@ public class GridScript : MonoBehaviour
             }
         }
         Debug.Log($"Grid generated with {boardWords.Count} valid words");
+        SceneManager.LoadScene("PostGameScene");
     }
 
         
