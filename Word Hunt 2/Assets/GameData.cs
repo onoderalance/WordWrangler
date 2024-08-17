@@ -1,24 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "GameData", menuName = "ScriptableObjects/GameData", order = 1)]
 public class GameData : ScriptableObject
 {
+    private static GameData _instance;
+
+    public static GameData Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = Resources.Load<GameData>("GameData");
+            }
+            return _instance;
+        }
+    }
+
     public HashSet<string> boardWords;
     public HashSet<string> playerWords;
     public int totalScore;
+    public int seedNumber;
     public float wordsPerMinute;
     public float scorePerMinute;
-    public int seedNumber;
 
-    public void Initialize(HashSet<string> boardWords, HashSet<string> playerWords, int totalScore, float wordsPerMinute, float scorePerMinute, int seedNumber)
+    // Method to clear the data (useful when starting a new game)
+    public void ClearData()
     {
-        this.boardWords = new HashSet<string>(boardWords);
-        this.playerWords = new HashSet<string>(playerWords);
-        this.totalScore = totalScore;
-        this.wordsPerMinute = wordsPerMinute;
-        this.scorePerMinute = scorePerMinute;
-        this.seedNumber = seedNumber;
+        boardWords = new HashSet<string>();
+        playerWords = new HashSet<string>();
+        totalScore = 0;
+        seedNumber = 0;
+        wordsPerMinute = 0f;
+        scorePerMinute = 0f;
     }
 }
+
