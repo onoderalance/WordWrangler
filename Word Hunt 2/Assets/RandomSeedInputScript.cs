@@ -71,15 +71,7 @@ public class RandomSeedInputScript : MonoBehaviour
     {
         saveSystem = new SaveSystem();
 
-        // Save some data
-        SaveData data = new SaveData {seed = newSeed};
-        saveSystem.SaveData(data);
-
-        // Load the data back
-        SaveData loadedData = saveSystem.LoadData();
-        if (loadedData != null)
-        {
-            Debug.Log("Loaded seed: " + loadedData.seed);
-        }
+        saveSystem.UpdateSeed(newSeed);
+        
     }
 }
