@@ -10,6 +10,8 @@ public class PlayerScript : MonoBehaviour
     ManagerScript managerScript;
     TileScript tile;
     GridScript grid;
+    public ScoreScript score;
+    public GameData gameData;
 
     //variables for tracking current tile position
     public int currTilePosX;
@@ -77,8 +79,13 @@ public class PlayerScript : MonoBehaviour
             if (currentWord != string.Empty)
             {
                 if (validWord(currentWord))
+                {
                     Debug.Log($"Added {currentWord}");
+                    //adds score
+                    score.addWord(currentWord);
+                    //adds to list of words
                     foundWords.Add(currentWord);
+                }
             }
             
             //reset wordbuilding
@@ -135,5 +142,11 @@ public class PlayerScript : MonoBehaviour
         tile.Select();
         currTilePosX = tile.posX;
         currTilePosY = tile.posY;
+    }
+
+    //save the player's foundwords into the gameData playerWords
+    public void saveFoundWords()
+    {
+        gameData.playerWords = foundWords;
     }
 }
