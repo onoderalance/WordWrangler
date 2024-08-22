@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     ManagerScript managerScript;
     TileScript tile;
     GridScript grid;
+    public ScoreScript score;
 
     //variables for tracking current tile position
     public int currTilePosX;
@@ -77,8 +78,13 @@ public class PlayerScript : MonoBehaviour
             if (currentWord != string.Empty)
             {
                 if (validWord(currentWord))
+                {
                     Debug.Log($"Added {currentWord}");
+                    //adds score
+                    score.addWord(currentWord);
+                    //adds to list of words
                     foundWords.Add(currentWord);
+                }
             }
             
             //reset wordbuilding
