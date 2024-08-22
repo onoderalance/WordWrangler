@@ -69,7 +69,8 @@ public class postgamescript : MonoBehaviour
         foreach (var word in sortedWords)
         {
             GameObject wordTextObj = Instantiate(wordTextPrefab, contentTransform);
-            TextMeshProUGUI wordText = wordTextObj.GetComponent<TextMeshProUGUI>();
+            TextMeshPro wordText = wordTextObj.GetComponent<TextMeshPro>();
+     
             wordText.text = word;
 
             if (playerWords.Contains(word))
