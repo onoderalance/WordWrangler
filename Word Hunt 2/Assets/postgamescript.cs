@@ -54,8 +54,7 @@ public class postgamescript : MonoBehaviour
         List<string> boardWords = gameData.boardWords.ToList();
         HashSet<string> playerWords = gameData.playerWords;
 
-        print("HELP");
-        foreach (string word in boardWords)
+        foreach (string word in playerWords)
         {
             Debug.Log(word);
         }
