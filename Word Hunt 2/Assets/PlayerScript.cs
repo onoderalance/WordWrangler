@@ -148,5 +148,6 @@ public class PlayerScript : MonoBehaviour
     public void saveFoundWords()
     {
         gameData.playerWords = foundWords;
+        gameData.wordsPerMinute = (float)foundWords.Count * 3 / 4;
     }
 }

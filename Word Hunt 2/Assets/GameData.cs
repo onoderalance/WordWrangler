@@ -23,7 +23,7 @@ public class GameData : ScriptableObject
     public int totalScore;
     public int seedNumber;
     public float wordsPerMinute;
-    public float scorePerMinute;
+    public int scorePerMinute;
 
     // Method to clear the data (useful when starting a new game)
     public void ClearData()
@@ -33,7 +33,7 @@ public class GameData : ScriptableObject
         totalScore = 0;
         seedNumber = 0;
         wordsPerMinute = 0f;
-        scorePerMinute = 0f;
+        scorePerMinute = 0;
     }
 }
 

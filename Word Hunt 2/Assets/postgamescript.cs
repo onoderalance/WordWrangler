@@ -33,7 +33,7 @@ public class postgamescript : MonoBehaviour
             string displayText = $"Board Words: {boardWordsCount}\n" +
                                  $"Total Score: {totalScore}\n" +
                                  $"Words Per Minute: {wordsPerMinute:F2}\n" +
-                                 $"Score Per Minute: {scorePerMinute:F2}";
+                                 $"Score Per Minute: {scorePerMinute}";
 
             tlText.text = displayText;
         }
@@ -54,11 +54,6 @@ public class postgamescript : MonoBehaviour
         List<string> boardWords = gameData.boardWords.ToList();
         HashSet<string> playerWords = gameData.playerWords;
 
-        foreach (string word in playerWords)
-        {
-            Debug.Log(word);
-        }
-
         // Sort the words
         var sortedWords = boardWords
             .OrderByDescending(word => word.Length) // sort by word length
@@ -69,13 +64,13 @@ public class postgamescript : MonoBehaviour
         foreach (var word in sortedWords)
         {
             GameObject wordTextObj = Instantiate(wordTextPrefab, contentTransform);
-            TextMeshPro wordText = wordTextObj.GetComponent<TextMeshPro>();
-     
+            TextMeshProUGUI wordText = wordTextObj.GetComponent<TextMeshProUGUI>();
+
             wordText.text = word;
 
             if (playerWords.Contains(word))
             {
-                wordText.color = Color.green; 
+                wordText.color = Color.green;
             }
         }
     }
