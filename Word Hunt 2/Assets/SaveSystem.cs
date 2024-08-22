@@ -8,8 +8,11 @@ public class SaveSystem
     [Serializable]
     public class SaveData
     {
+        //testing variables
         public int lastSeed;
         public List<int> seeds;
+        //main list of records
+        public List<GameRecord> games;
     }
 
     private SaveData currentData;
@@ -25,6 +28,12 @@ public class SaveSystem
     {
         currentData.lastSeed = newSeed;
         currentData.seeds.Add(newSeed);
+        WriteData();
+    }
+
+    public void AddRecord(GameRecord record)
+    {
+        currentData.games.Add(record);
         WriteData();
     }
 
