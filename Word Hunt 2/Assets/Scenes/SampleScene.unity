@@ -154,6 +154,7 @@ MonoBehaviour:
   currentWord: 
   buildingWord: 0
   score: {fileID: 1528269918}
+  gameData: {fileID: 11400000, guid: a4127225c04a0476191974ceab09848b, type: 2}
   currTilePosX: 0
   currTilePosY: 0
 --- !u!4 &27303014
@@ -470,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1641690612}
+  playerScript: {fileID: 27303013}
 --- !u!114 &1528269918
 MonoBehaviour:
   m_ObjectHideFlags: 0

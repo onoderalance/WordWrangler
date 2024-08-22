@@ -8,6 +8,7 @@ public class TimerScript : MonoBehaviour
 {
     public TextMeshProUGUI timerText; // Assign a UI Text component in the Inspector
     private float timeRemaining;
+    public PlayerScript playerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,9 @@ public class TimerScript : MonoBehaviour
         //When time is out, go to post-game screen
         if(timeRemaining <= 0)
         {
+            //save player hashset
+            playerScript.saveFoundWords();
+            //load next scene
             SceneManager.LoadScene("postgamescene");   
         }
         
