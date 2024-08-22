@@ -54,6 +54,12 @@ public class postgamescript : MonoBehaviour
         List<string> boardWords = gameData.boardWords.ToList();
         HashSet<string> playerWords = gameData.playerWords;
 
+        print("HELP");
+        foreach (string word in boardWords)
+        {
+            Debug.Log(word);
+        }
+
         // Sort the words
         var sortedWords = boardWords
             .OrderByDescending(word => word.Length) // sort by word length

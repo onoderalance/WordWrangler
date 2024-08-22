@@ -14,7 +14,7 @@ public class TimerScript : MonoBehaviour
     void Start()
     {
         //initialize the time to 80 seconds
-        timeRemaining = 80f;
+        timeRemaining = 10f;
     }
 
     // Update is called once per frame
