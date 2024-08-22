@@ -8,7 +8,8 @@ public class RandomSeedInputScript : MonoBehaviour
 {
     public int seed;
     public TMP_InputField inputField;
-   // public GameData gameData;
+    public GameData gameData;
+    private SaveSystem saveSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -55,12 +56,22 @@ public class RandomSeedInputScript : MonoBehaviour
     public void SetSeed(int newSeed)
     {
         seed = newSeed;
-        GameData.Instance.seedNumber = newSeed;
+        gameData.seedNumber = newSeed;
+        SaveSeed(newSeed);
         Random.InitState(newSeed);
     }
 
     public int GetCurrentSeed()
     {
         return seed;
+    }
+
+    //save current seed to savedata
+    public void SaveSeed(int newSeed)
+    {
+        saveSystem = new SaveSystem();
+
+        saveSystem.UpdateSeed(newSeed);
+        
     }
 }

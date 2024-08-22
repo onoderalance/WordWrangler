@@ -20,7 +20,10 @@ public class TimerScript : MonoBehaviour
     void Update()
     {
         // Decrement the elapsed time
-        timeRemaining -= Time.deltaTime;
+        if(timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+        }
 
         // Calculate minutes, seconds, and milliseconds
         int minutes = Mathf.FloorToInt(timeRemaining / 60f);
