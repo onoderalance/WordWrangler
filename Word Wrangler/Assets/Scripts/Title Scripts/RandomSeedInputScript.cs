@@ -57,6 +57,7 @@ public class RandomSeedInputScript : MonoBehaviour
     {
         seed = newSeed;
         gameData.seedNumber = newSeed;
+        //SHOULD NOT SAVE SEED UNTIL GAME STARTED, MAYBE NOT UNTIL END OF GAME?
         SaveSeed(newSeed);
         Random.InitState(newSeed);
     }
@@ -70,8 +71,6 @@ public class RandomSeedInputScript : MonoBehaviour
     public void SaveSeed(int newSeed)
     {
         saveSystem = new SaveSystem();
-
         saveSystem.UpdateSeed(newSeed);
-        
     }
 }

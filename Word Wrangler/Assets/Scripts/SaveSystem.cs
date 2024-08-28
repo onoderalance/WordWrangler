@@ -13,6 +13,13 @@ public class SaveSystem
         public List<int> seeds;
         //main list of records
         public List<GameRecord> games;
+
+        // Constructor to initialize lists
+        public SaveData()
+        {
+            seeds = new List<int>();
+            games = new List<GameRecord>();
+        }
     }
 
     private SaveData currentData;
