@@ -23,7 +23,7 @@ public class StartScript : MonoBehaviour
             {
                 Debug.Log("Start clicked");
                 //start game
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("Main");
             }
         }
     }
