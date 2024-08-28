@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scrolltextscript : MonoBehaviour
+public class ScrollTextScript : MonoBehaviour
 {
     public Text textComponent;
     public GameData gameData;

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
-public class postgamescript : MonoBehaviour
+public class PostGameScript : MonoBehaviour
 {
     public GameData gameData;
     private TextMeshProUGUI tlText;
