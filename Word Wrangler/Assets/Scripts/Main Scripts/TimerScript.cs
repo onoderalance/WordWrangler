@@ -10,11 +10,14 @@ public class TimerScript : MonoBehaviour
     private float timeRemaining;
     public PlayerScript playerScript;
 
+    //constant for game time (usually will be 80f, but 10f for testing)
+    public const float gameLength = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
-        //initialize the time to 80 seconds
-        timeRemaining = 10f;
+        //initialize the time to gameLength seconds
+        timeRemaining = gameLength;
     }
 
     // Update is called once per frame
