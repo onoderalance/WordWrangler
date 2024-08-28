@@ -1,2 +1,2 @@
-# WordHunt2
- Unity Word Hunt project
+# Word Wrangler
+ Unity Word Wrangler project
