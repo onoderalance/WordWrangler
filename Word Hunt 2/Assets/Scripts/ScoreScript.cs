@@ -45,5 +45,6 @@ public class ScoreScript : MonoBehaviour
         score += newVal;
         //update total score
         gameData.totalScore = score;
+        gameData.scorePerMinute = score * 3 / 4;
     }
 }
