@@ -26,11 +26,14 @@ public class PostGameScript : MonoBehaviour
         if (tlText != null && gameData != null)
         {
             int boardWordsCount = gameData.boardWords.Count;
+            int playerWordsCount = gameData.playerWords.Count;
             int totalScore = gameData.totalScore;
             float wordsPerMinute = gameData.wordsPerMinute;
             float scorePerMinute = gameData.scorePerMinute;
 
-            string displayText = $"Board Words: {boardWordsCount}\n" +
+            string displayText = $"Statistics: \n" + "\n" + 
+                                 $"Total Words on Board: {boardWordsCount}\n" +
+                                 $"Words Found: {playerWordsCount}\n" +
                                  $"Total Score: {totalScore}\n" +
                                  $"Words Per Minute: {wordsPerMinute:F2}\n" +
                                  $"Score Per Minute: {scorePerMinute}";
