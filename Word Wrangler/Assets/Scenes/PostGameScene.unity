@@ -1491,7 +1491,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3233173b5f2daa749bb88dda6ed04e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
   inputField: {fileID: 150578815}
   gameData: {fileID: 11400000, guid: a4127225c04a0476191974ceab09848b, type: 2}
 --- !u!1 &1327636038
@@ -1611,7 +1610,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 48a18461d1ceff34ba505cf0b34a9fc9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 018b6356b31a16f4aa343f9c00362c2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2216,7 +2215,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 532405435}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999978
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

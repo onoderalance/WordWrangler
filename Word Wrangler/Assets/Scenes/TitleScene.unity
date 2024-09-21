@@ -181,15 +181,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Word Wrangler* '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f87057736b99bc94794ad305f1f20217, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: f87057736b99bc94794ad305f1f20217, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4284915929
+  m_fontColor: {r: 0.8509804, g: 0.627451, b: 0.4, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -301,7 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3233173b5f2daa749bb88dda6ed04e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
   inputField: {fileID: 1519452852}
   gameData: {fileID: 11400000, guid: a4127225c04a0476191974ceab09848b, type: 2}
 --- !u!1 &265305356
@@ -1225,8 +1224,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4284915929
+  m_fontColor: {r: 0.8509804, g: 0.627451, b: 0.4, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1329,7 +1328,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.2155064, g: 0.4745098, b: 0.19215688, a: 0}
+  m_BackGroundColor: {r: 0.7921569, g: 0.92941177, b: 0.9764706, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
