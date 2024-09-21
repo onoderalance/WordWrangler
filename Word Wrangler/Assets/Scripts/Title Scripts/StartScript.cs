@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class StartScript : MonoBehaviour
 {
+    public static bool debugStart = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,14 @@ public class StartScript : MonoBehaviour
                 //start game
                 SceneManager.LoadScene("Main");
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("Started debug mode");
+            debugStart = true;
+            //start game
+            SceneManager.LoadScene("Main");
         }
     }
 }
