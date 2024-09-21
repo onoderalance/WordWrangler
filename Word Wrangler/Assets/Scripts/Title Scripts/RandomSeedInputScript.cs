@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RandomSeedInputScript : MonoBehaviour
 {
-    public int seed;
+    public static int seed;
     public TMP_InputField inputField;
     public GameData gameData;
     private SaveSystem saveSystem;
@@ -17,9 +18,13 @@ public class RandomSeedInputScript : MonoBehaviour
         // Register the OnInputFieldChanged method to the onValueChanged event
         inputField.onValueChanged.AddListener(OnInputFieldChanged);
 
-        //generates and sets a random seed
-        SetSeed(GenerateSeed());
-        print($"New Seed: {seed}");
+        //only generate new seed for the title
+        if (SceneManager.GetActiveScene().name == "TitleScene")
+        { 
+            //generates and sets a random seed
+            SetSeed(GenerateSeed());
+            print($"New Seed: {seed}");
+        }
         inputField.text = seed.ToString();
     }
 
