@@ -20,6 +20,9 @@ public class PlayerScript : MonoBehaviour
     //variables for player's stored words
     public HashSet<string> foundWords = new HashSet<string>();
 
+    //sound variables
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +88,8 @@ public class PlayerScript : MonoBehaviour
                     score.addWord(currentWord);
                     //adds to list of words
                     foundWords.Add(currentWord);
+                    //plays sound
+                    playWhip();
                 }
             }
             
@@ -142,6 +147,8 @@ public class PlayerScript : MonoBehaviour
         tile.Select();
         currTilePosX = tile.posX;
         currTilePosY = tile.posY;
+        //play sound of click
+        playClick();
     }
 
     //save the player's foundwords into the gameData playerWords
@@ -150,4 +157,21 @@ public class PlayerScript : MonoBehaviour
         gameData.playerWords = foundWords;
         gameData.wordsPerMinute = (float)foundWords.Count * 3 / 4;
     }
+
+    //sound functions
+    void playWhip()
+    { 
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/whip");
+        audioSource.PlayOneShot(clip, 0.5f);
+    }
+
+    void playClick()
+    {
+        //randomly plays one fo the click sounds
+        String clipName = "Sounds/click" + UnityEngine.Random.Range(1,4).ToString();
+
+        AudioClip clip = Resources.Load<AudioClip>(clipName);
+        audioSource.PlayOneShot(clip);
+    }
+
 }
