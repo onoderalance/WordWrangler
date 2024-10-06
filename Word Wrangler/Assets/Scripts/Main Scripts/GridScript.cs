@@ -14,6 +14,9 @@ public class GridScript : MonoBehaviour
     TileScript tileScript;
     public GameData GameData;
 
+    //sound variables
+    public AudioSource audioSource;
+
     void Start()
     {
         // get validWords
@@ -23,6 +26,8 @@ public class GridScript : MonoBehaviour
 
         // regen till valid
         GenerateValidGrid();
+
+        playStart();
     }
 
     void GenerateValidGrid()
@@ -188,5 +193,12 @@ public class GridScript : MonoBehaviour
                 tileScript.UnSelect();
             }
         }
+    }
+
+    //sound functions
+    void playStart()
+    {
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/guitar");
+        audioSource.PlayOneShot(clip, 0.25f);
     }
 }
