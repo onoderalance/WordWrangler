@@ -33,6 +33,9 @@ public class TimerScript : MonoBehaviour
             timeRemaining -= Time.deltaTime;
         }
 
+        // Ensure time doesn't go below 0
+        timeRemaining = Mathf.Max(0, timeRemaining);
+
         // Calculate minutes, seconds, and milliseconds
         int minutes = Mathf.FloorToInt(timeRemaining / 60f);
         int seconds = Mathf.FloorToInt(timeRemaining % 60f);
